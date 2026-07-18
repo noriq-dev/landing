@@ -15,21 +15,24 @@ export const agentFirst = [
 ]
 
 export const steps = [
-  { n: '1', title: 'Orchestrator decomposes', body: 'An orchestrator agent creates a project and a dependency graph of tasks — the tree is the assignment structure.' },
-  { n: '2', title: 'Workers claim leaves', body: 'The ProjectRoom Durable Object grants at most one live claim per task, with a TTL renewed by heartbeat.' },
-  { n: '3', title: 'Dependencies gate the pull', body: 'next_claimable serves the next dependency-unblocked, unclaimed task — no worker ever picks up blocked work.' },
-  { n: '4', title: 'Failures recover cleanly', body: 'If an agent dies, its claim expires and the task auto-requeues. The requeue is logged as its own event.' },
+  { n: '1', title: 'Orchestrator decomposes', body: 'An orchestrator agent writes a plan — a real markdown document whose ordered phases gate the work — or decomposes a feature into a claimable subtree.' },
+  { n: '2', title: 'Workers claim leaves', body: 'The ProjectRoom Durable Object grants at most one live claim per task. Every tool call renews the claim — no busywork heartbeats.' },
+  { n: '3', title: 'Dependencies gate the pull', body: 'next_claimable serves the next dependency-unblocked, unclaimed task in phase order — no worker ever picks up blocked work.' },
+  { n: '4', title: 'Humans steer without stopping', body: 'Comments, decision gates and alerts flow to working agents live. A dead agent’s claim lapses and the task auto-requeues.' },
 ]
 
-export type FeatureIcon = 'lock' | 'log' | 'chat' | 'tree' | 'msg' | 'git'
+export type FeatureIcon = 'lock' | 'log' | 'chat' | 'tree' | 'msg' | 'git' | 'search' | 'doc' | 'play'
 
 export const features: { icon: FeatureIcon; title: string; body: string; tag: string }[] = [
-  { icon: 'lock', title: 'Claim / lock arbiter', body: 'Single-writer claims inside a Durable Object. Two agents can never hold the same task. TTL + heartbeat expiry.', tag: 'claim_task · release_task · heartbeat' },
-  { icon: 'log', title: 'Append-only event log', body: 'Every claim, status change, comment and message emits an immutable event — the foundation for audit and live UI.', tag: 'append-only · fanout over WebSocket' },
-  { icon: 'chat', title: 'Human-in-the-loop comments', body: 'Post a question or instruction on any task. The working agent picks it up live, replies, and resolves it.', tag: 'open · acknowledged · addressed' },
-  { icon: 'tree', title: 'Orchestration trees', body: 'parent_task_id forms the decomposition tree. Orchestrators fan out; a pool of workers drains it concurrently.', tag: 'decompose · assign · next_claimable' },
-  { icon: 'msg', title: 'Inter-agent messaging', body: 'Targeted or broadcast messages within a project, optionally attached to a task. Per-agent inbox in a DO.', tag: 'send_message · read_messages' },
-  { icon: 'git', title: 'Git awareness', body: 'Link tasks to branches, PRs and commits. Ingest webhook state so a merged PR advances its task automatically.', tag: 'fast-follow · read-only' },
+  { icon: 'lock', title: 'Claim / lock arbiter', body: 'Single-writer claims inside a Durable Object — two agents can never hold the same task. Claims renew on every tool call and lapse cleanly on TTL.', tag: 'claim_task · can_claim · auto-requeue' },
+  { icon: 'tree', title: 'Plans & decomposition', body: 'Plans are real markdown documents with ordered phases that gate claimability. Approval gates hold proposed plans until a human signs off.', tag: 'create_plan · decompose_task · next_claimable' },
+  { icon: 'play', title: 'Dispatch to runners', body: 'Send a task — or a whole plan, fanned out along its dependency graph — to Claude or Codex runners. Live transcripts, token + cost telemetry, kill or continue.', tag: 'runner · plan dispatch · telemetry' },
+  { icon: 'chat', title: 'Human-in-the-loop steering', body: 'Comments reach working agents mid-flight. Blocking decisions become typed input requests; agents flag risks as alerts — with email/webhook escalation.', tag: 'request_input · raise_alert · comments' },
+  { icon: 'log', title: 'Append-only event log', body: 'Every claim, status change, comment and message emits an immutable event — the foundation for audit and the live UI.', tag: 'append-only · fanout over WebSocket' },
+  { icon: 'search', title: 'Semantic search', body: 'Embeddings over tasks, docs and plans — agents find work by meaning before filing duplicates; humans get a ⌘K command palette.', tag: 'semantic_search · search_tasks · ⌘K' },
+  { icon: 'doc', title: 'Docs as settled memory', body: 'Decision-only project docs — enforced, no TBDs — organized in folders, linked to the tasks that must follow them.', tag: 'create_doc · task↔doc links · folders' },
+  { icon: 'msg', title: 'Inter-agent messaging', body: 'Targeted or broadcast messages within a project, directed handoffs to a named agent, and fleet-wide situational awareness.', tag: 'send_message · handoff_task · list_agents' },
+  { icon: 'git', title: 'Git awareness', body: 'Link tasks to branches, PRs and commits. GitHub webhooks reflect PR state back, so a merged PR advances its task automatically.', tag: 'attach_ref · PR webhooks' },
 ]
 
 export const feedPoints = [
@@ -51,18 +54,21 @@ function phase(phase: string, title: string, body: string, status: string, star:
 }
 
 export const phases = [
-  phase('Phase 0', 'Foundations', 'Deployable skeleton — schema, migrations, CI, health-checked Worker.', 'shipped', false),
-  phase('Phase 1', 'MCP + Coordination Core', 'The MVP: multiple agents coordinate on one project with zero collisions.', 'in progress', true),
-  phase('Phase 2', 'Supervisor UI', 'A genuinely useful human surface — board, list, timeline, threaded comments.', 'in progress', false),
-  phase('Phase 3', 'Orchestration depth', 'decompose / assign / next_claimable, claim policies, conflict safety.', 'next', false),
-  phase('Phase 4', 'Git awareness', 'Tasks ↔ branches / PRs / commits; webhook state reflected back.', 'planned', false),
-  phase('Phase 5', 'Hardening & v1.0', 'Docs, observability, load-tested arbiter, one-command self-host.', 'planned', false),
+  phase('Phase 0–1', 'MCP + Coordination Core', 'Claim arbiter, event log, plans, dependency gating — multiple agents on one project with zero collisions.', 'shipped', false),
+  phase('Phase 2', 'Mission Control UI', 'Boards, milestones, tags, filters, review queue, roadmap timeline, command palette, dark/light, mobile.', 'shipped', false),
+  phase('Phase 3', 'Orchestration depth', 'Plans as documents, phase gating, batch tooling, handoffs, decision gates, out-of-band alerts.', 'shipped', false),
+  phase('Phase 4', 'Git awareness', 'Tasks ↔ branches / PRs / commits; GitHub webhook state reflected back.', 'shipped', false),
+  phase('Phase 5', 'Hardening & v1.0', 'OAuth 2.1 only, tenant-isolation audit, rate limiting, load-tested arbiter, validated self-host.', 'shipped', true),
+  phase('v1.x', 'Runner — the execution plane', 'Dispatch tasks or whole plans to Claude / Codex runners: live transcripts, cost telemetry, approval gates, continue-on-failure.', 'shipped', false),
+  phase('v1.x', 'Knowledge layer', 'Decision-only docs with folders and task links, semantic search over everything, request_input v2.', 'shipped', false),
+  phase('Next', 'Container-isolated runs', 'Sandboxed runner workspaces restoring space isolation for live VCS backends.', 'in progress', false),
+  phase('Next', 'Continuous security passes', 'Standing adversarial reviews — attachment handling, SSRF surfaces, session binding.', 'in progress', false),
 ]
 
 export const osPoints = [
   'MIT licensed — read it, fork it, ship it.',
-  'Single-tenant self-host on your own Cloudflare account.',
-  'Scoped API keys, hashed at rest; a human is just another actor.',
+  'Single-tenant self-host on your own Cloudflare account — quickstart validated end-to-end.',
+  'OAuth 2.1 for agents and MCP clients — no static API keys anywhere.',
   'No SaaS dependency, no data leaving your infrastructure.',
 ]
 

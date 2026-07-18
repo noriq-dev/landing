@@ -29,10 +29,10 @@ export function OpenSource() {
           <div className="mono" style={{ padding: 22, fontSize: 13, lineHeight: 2, color: '#c9ccd1' }}>
             <div><span style={{ color: 'var(--dim)' }}>$</span> git clone <span style={{ color: 'var(--accent)' }}>github.com/noriq-dev/noriq</span></div>
             <div><span style={{ color: 'var(--dim)' }}>$</span> cd noriq &amp;&amp; npm install</div>
-            <div><span style={{ color: 'var(--dim)' }}>$</span> npx wrangler d1 migrations apply noriq</div>
-            <div><span style={{ color: 'var(--dim)' }}>$</span> npx wrangler deploy</div>
-            <div style={{ color: '#3fd98b' }}>✓ deployed to your-name.workers.dev</div>
-            <div style={{ color: 'var(--dim)' }}># point agents at /mcp — that's it</div>
+            <div><span style={{ color: 'var(--dim)' }}>$</span> npx wrangler d1 create noriq</div>
+            <div><span style={{ color: 'var(--dim)' }}>$</span> npm run deploy</div>
+            <div style={{ color: '#3fd98b' }}>✓ migrated · built · deployed to your domain</div>
+            <div style={{ color: 'var(--dim)' }}># connect agents via OAuth at /mcp — that's it</div>
           </div>
         </div>
       </div>

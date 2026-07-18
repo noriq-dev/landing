@@ -59,6 +59,24 @@ const featureIcons: Record<FeatureIcon, JSX.Element> = {
       <path d="M6 8.4v7.2M6 15.6V12a3 3 0 0 1 3-3h6.6" />
     </svg>
   ),
+  search: (
+    <svg {...strokeProps}>
+      <circle cx="10.5" cy="10.5" r="6" />
+      <path d="M15 15l6 6" />
+    </svg>
+  ),
+  doc: (
+    <svg {...strokeProps}>
+      <path d="M6 2.5h8l4 4V21.5H6z" />
+      <path d="M14 2.5v4h4M9 12h6M9 16h6" />
+    </svg>
+  ),
+  play: (
+    <svg {...strokeProps}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M10 8.5l6 3.5-6 3.5z" />
+    </svg>
+  ),
 }
 
 export function FeatureIconGlyph({ icon }: { icon: FeatureIcon }) {
