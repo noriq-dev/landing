@@ -90,6 +90,7 @@ export const footerCols = [
     head: 'Developers',
     links: [
       { label: 'Quickstart', href: QUICKSTART_URL },
+      { label: 'Runner', href: 'https://github.com/noriq-dev/runner' },
       { label: 'Connect an agent', href: `${GITHUB_URL}#connect-an-agent` },
       { label: 'Self-host guide', href: `${GITHUB_URL}/blob/main/docs/SELF_HOST_RESEARCH.md` },
       { label: 'Architecture', href: `${GITHUB_URL}/blob/main/ARCHITECTURE.md` },
