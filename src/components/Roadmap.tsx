@@ -6,7 +6,7 @@ export function Roadmap() {
       <div className="kicker">Roadmap</div>
       <h2 className="h2" style={{ maxWidth: 720 }}>v1.0 shipped. Still moving aggressively.</h2>
       <p className="lead" style={{ maxWidth: 640 }}>
-        The proof point held: fleets of workers claiming concurrently with zero double-claims, humans steering mid-flight. Since v1.0 the focus is the execution plane and the knowledge layer.
+        The proof point held twice: fleets of workers claiming concurrently with zero double-claims, humans steering mid-flight — and now a dispatched plan running the whole pipeline unattended, with the daemon opening the pull request itself. The focus since v1.0 is the execution plane and the knowledge layer.
       </p>
 
       <div style={{ marginTop: 46, display: 'flex', flexDirection: 'column' }}>

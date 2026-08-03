@@ -1,10 +1,12 @@
 const RUNNER_URL = 'https://github.com/noriq-dev/runner'
 
 const runnerPoints = [
-  'One git worktree per run on a throwaway branch — agents never touch your checkout.',
-  'A deterministic verify gate, plus an optional fresh-eyes reviewer — even from the other vendor, so claude’s work is judged by codex.',
+  'One git worktree per unit of concurrent work, on throwaway branches — agents never touch your checkout.',
+  'Unplanned tasks get planned first: a read-only planner writes the execution spec back to the task, and an independent checker critiques it before a build token is spent.',
+  'A deterministic verify gate, plus a fresh-eyes adversarial reviewer — even from the other vendor, so claude’s work is judged by codex — answering each acceptance criterion with evidence, findings adjudicated claim by claim.',
+  'Stuck runs ask a human and park instead of guessing; out-of-scope findings become proposed tasks, not failures.',
   'Green runs rebase onto one integration branch and re-verify — you approve the merge, not the push.',
-  'No push credentials for any agent, ever. Budgets are daemon-enforced; only your OAuth token crosses the wire.',
+  'No push credentials for any agent, ever. One budget per run, daemon-enforced across every session it spawns.',
 ]
 
 export function Runner() {
@@ -15,7 +17,7 @@ export function Runner() {
           <div className="kicker">The execution plane</div>
           <h2 className="h2">Dispatch a plan. Watch it land.</h2>
           <p className="lead">
-            The <a href={RUNNER_URL} target="_blank" rel="noopener"><span className="mono" style={{ color: 'var(--ink)' }}>noriq-runner</span></a> daemon runs on your machine: it discovers your repos, spawns <b>Claude or Codex</b> in isolated worktrees, and streams live transcripts and token/cost telemetry back — so you dispatch, watch, steer and approve entirely from the dashboard.
+            The <a href={RUNNER_URL} target="_blank" rel="noopener"><span className="mono" style={{ color: 'var(--ink)' }}>noriq-runner</span></a> daemon runs on your machine: it discovers your repos, spawns <b>Claude or Codex</b> in isolated worktrees, and runs each dispatch as a full pipeline — <b>plan → build → verify → land</b> — streaming live transcripts and token/cost telemetry back, so you dispatch, watch, steer and approve entirely from the dashboard. Live-proven end to end: the daemon has opened its own pull requests.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 13, marginTop: 26 }}>
             {runnerPoints.map((p) => (

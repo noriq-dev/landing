@@ -27,14 +27,17 @@ function mkEvent(ageSec: number): FeedEvent {
   const pick = <T,>(a: T[]) => a[Math.floor(Math.random() * a.length)]
   const key = 'NRQ-' + (120 + Math.floor(Math.random() * 80))
   const kinds = [
-    () => ({ dot: '#4c9dff', who: pick(WORKERS), verb: 'claimed', obj: key, meta: 'ttl 90s' }),
+    () => ({ dot: '#4c9dff', who: pick(WORKERS), verb: 'claimed', obj: key, meta: 'ttl 30m' }),
     () => ({ dot: '#3fd98b', who: pick(WORKERS), verb: 'completed', obj: key, meta: '+event' }),
     () => ({ dot: '#c6f24e', who: 'you', verb: 'commented on', obj: key, meta: '→ addressed' }),
     () => ({ dot: '#f5a623', who: 'atlas', verb: 'decomposed', obj: key, meta: '4 subtasks' }),
     () => ({ dot: '#b57bff', who: pick(WORKERS), verb: 'messaged', obj: 'atlas', meta: 'blocked on dep' }),
-    () => ({ dot: '#6b7280', who: pick(WORKERS), verb: 'renewed claim', obj: key, meta: 'heartbeat' }),
+    () => ({ dot: '#6b7280', who: pick(WORKERS), verb: 'renewed claim', obj: key, meta: 'tool call' }),
     () => ({ dot: '#ff8a5c', who: pick(WORKERS), verb: 'claim lapsed', obj: key, meta: 'auto-requeued' }),
     () => ({ dot: '#3fd98b', who: 'atlas', verb: 'unblocked', obj: key, meta: 'dep merged' }),
+    () => ({ dot: '#c6f24e', who: 'you', verb: 'dispatched run on', obj: key, meta: 'build · claude' }),
+    () => ({ dot: '#4c9dff', who: pick(WORKERS), verb: 'acquired lock', obj: key, meta: '2 paths' }),
+    () => ({ dot: '#f5a623', who: pick(WORKERS), verb: 'proposed', obj: key, meta: 'awaiting accept' }),
   ]
   const e = pick(kinds)()
   return {

@@ -18,7 +18,7 @@ export default function App() {
       <Hero />
       <div className="wrap" style={{ paddingTop: 26, paddingBottom: 8 }}>
         <div className="mono" style={{ textAlign: 'center', fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--dim)', opacity: 0.8 }}>
-          Built for MCP-native agents · orchestrator + workers · human-in-the-loop
+          Speaks MCP 2026-07-28 · orchestrator + workers · human-in-the-loop
         </div>
       </div>
       <Problem />

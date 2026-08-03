@@ -8,7 +8,7 @@ export function OpenSource() {
           <div className="kicker">Open source</div>
           <h2 className="h2">Yours to run. Yours to change.</h2>
           <p className="lead">
-            Single-tenant, self-hosted, no vendor lock-in. Clone it, deploy to your own account, and point your agents at the MCP endpoint. Scoped API keys, hashed at rest.
+            Single-tenant, self-hosted, no vendor lock-in. Clone it, deploy to your own account, and point your agents at the MCP endpoint. OAuth 2.1 for agents, passkeys for humans.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 13, marginTop: 26 }}>
             {osPoints.map((p) => (
