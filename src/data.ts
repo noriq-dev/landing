@@ -58,14 +58,16 @@ export const phases = [
   phase('Phase 2', 'Mission Control UI', 'Boards, milestones, tags, filters, review queue, roadmap timeline, command palette, dark/light, mobile.', 'shipped', false),
   phase('Phase 3', 'Orchestration depth', 'Plans as documents, phase gating, batch tooling, handoffs, decision gates, out-of-band alerts.', 'shipped', false),
   phase('Phase 4', 'Git awareness', 'Tasks ↔ branches / PRs / commits; GitHub webhook state reflected back.', 'shipped', false),
-  phase('Phase 5', 'Hardening & v1.0', 'OAuth 2.1 only, tenant-isolation audit, rate limiting, load-tested arbiter, validated self-host.', 'shipped', true),
-  phase('v1.x', 'Runner — the execution plane', 'Dispatch tasks or whole plans to Claude / Codex runners: live transcripts, cost telemetry, approval gates, continue-on-failure.', 'shipped', false),
-  phase('v1.x', 'Knowledge layer', 'Decision-only docs with folders and task links, semantic search over everything, request_input v2.', 'shipped', false),
-  phase('v1.x', 'Runner as orchestrator', 'One autonomous pipeline: a planner writes the spec, an adversarial checker critiques it, builds decompose into concurrent steps, verify answers each acceptance criterion with evidence — and any stage can pause to ask a human. Live-proven end to end: the daemon opened its own PR.', 'shipped', true),
-  phase('v1.x', 'Execution specs & file locking', 'Machine-checkable task specs handed to whichever agent claims the work, plus opt-in per-project path locks — reserved predictively from the files a spec anticipates.', 'shipped', false),
-  phase('v1.x', 'MCP 2026-07-28', 'The MCP endpoint speaks the latest protocol — stateless transport, subscriptions/listen — with fallback through 2024-11-05.', 'shipped', false),
+  phase('Phase 5', 'Hardening', 'OAuth 2.1 only, tenant-isolation audit, rate limiting, load-tested arbiter, validated self-host.', 'shipped', false),
+  phase('Runner v0.9', 'Runner — the execution plane', 'Dispatch tasks or whole plans to Claude / Codex runners: live transcripts, cost telemetry, approval gates, continue-on-failure.', 'shipped', false),
+  phase('v0.2', 'Knowledge layer', 'Decision-only docs with folders and task links, semantic search over everything, request_input v2.', 'shipped', false),
+  phase('v0.8–0.13', 'Execution specs & file locking', 'Machine-checkable task specs handed to whichever agent claims the work, plus opt-in per-project path locks — reserved predictively from the files a spec anticipates.', 'shipped', false),
+  phase('v0.10', 'Ask-the-project', 'Read-only RAG Q&A over tasks, docs and events — Workers AI on top of the semantic index.', 'shipped', false),
+  phase('Runner v0.13', 'Runner as orchestrator', 'One autonomous pipeline: a planner writes the spec, an adversarial checker critiques it, builds decompose into concurrent steps, verify answers each acceptance criterion with evidence — and any stage can pause to ask a human. Live-proven end to end: the daemon opened its own PR.', 'shipped', true),
+  phase('v0.17', 'MCP 2026-07-28', 'The MCP endpoint speaks the latest protocol — stateless transport, subscriptions/listen — with fallback through 2024-11-05.', 'shipped', false),
   phase('Next', 'Container-isolated runs', 'Sandboxed runner workspaces restoring space isolation for live VCS backends.', 'in progress', false),
   phase('Next', 'Continuous security passes', 'Standing adversarial reviews — attachment handling, SSRF surfaces, session binding.', 'in progress', false),
+  phase('v1.0', 'The 1.0 cut', 'Cut deliberately when the surface stops moving — not before.', 'planned', false),
 ]
 
 export const osPoints = [
