@@ -7,7 +7,7 @@ import { EventFeed } from './components/EventFeed'
 import { Architecture } from './components/Architecture'
 import { Roadmap } from './components/Roadmap'
 import { OpenSource } from './components/OpenSource'
-import { Runner } from './components/Runner'
+import { ConnectAgents } from './components/ConnectAgents'
 import { Cta } from './components/Cta'
 import { Footer } from './components/Footer'
 
@@ -28,7 +28,7 @@ export default function App() {
       <Architecture />
       <Roadmap />
       <OpenSource />
-      <Runner />
+      <ConnectAgents />
       <Cta />
       <Footer />
     </div>
