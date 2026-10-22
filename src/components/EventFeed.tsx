@@ -35,7 +35,7 @@ function mkEvent(ageSec: number): FeedEvent {
     () => ({ dot: '#6b7280', who: pick(WORKERS), verb: 'renewed claim', obj: key, meta: 'tool call' }),
     () => ({ dot: '#ff8a5c', who: pick(WORKERS), verb: 'claim lapsed', obj: key, meta: 'auto-requeued' }),
     () => ({ dot: '#3fd98b', who: 'atlas', verb: 'unblocked', obj: key, meta: 'dep merged' }),
-    () => ({ dot: '#c6f24e', who: 'you', verb: 'dispatched run on', obj: key, meta: 'build · claude' }),
+    () => ({ dot: '#c6f24e', who: 'you', verb: 'released', obj: key, meta: '→ review · PR linked' }),
     () => ({ dot: '#4c9dff', who: pick(WORKERS), verb: 'acquired lock', obj: key, meta: '2 paths' }),
     () => ({ dot: '#f5a623', who: pick(WORKERS), verb: 'proposed', obj: key, meta: 'awaiting accept' }),
   ]

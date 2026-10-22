@@ -26,11 +26,11 @@ export type FeatureIcon = 'lock' | 'log' | 'chat' | 'tree' | 'msg' | 'git' | 'se
 export const features: { icon: FeatureIcon; title: string; body: string; tag: string }[] = [
   { icon: 'lock', title: 'Claim / lock arbiter', body: 'Single-writer claims inside a Durable Object — two agents can never hold the same task. Opt-in per-project file locks stop them clobbering each other’s edits; both renew on every tool call and lapse cleanly on TTL.', tag: 'claim_task · acquire_lock · auto-requeue' },
   { icon: 'tree', title: 'Plans & execution specs', body: 'Plans are real markdown documents with ordered phases that gate claimability. Tasks carry execution specs — scope, settled decisions, acceptance criteria — that humans can read and correct in a structured editor.', tag: 'create_plan · executionSpec · next_claimable' },
-  { icon: 'play', title: 'Dispatch to runners', body: 'Send a task — or a whole plan, fanned out along its dependency graph — to Claude or Codex runners. Each run is a full pipeline with live transcripts, spend telemetry, steer and kill.', tag: 'plan → build → verify → land' },
-  { icon: 'chat', title: 'Human-in-the-loop steering', body: 'Comments reach working agents mid-flight. Blocking decisions become typed input requests that pause a run until answered; risks become alerts, adjacent work becomes a proposed task a human accepts.', tag: 'request_input · raise_alert · spin_off_task' },
+  { icon: 'play', title: 'MCP copilots', body: 'OAuth-connected agents — Cursor, Claude Code, Codex, and any MCP client — claim tasks, post comments, and release to review. Coding runs externally; Noriq holds coordination state.', tag: 'claim_task · OAuth · release_task' },
+  { icon: 'chat', title: 'Human-in-the-loop steering', body: 'Comments reach working agents mid-flight. Blocking decisions become typed input requests that park the task until answered; risks become alerts, adjacent work becomes a proposed task a human accepts.', tag: 'request_input · raise_alert · create_tasks' },
   { icon: 'log', title: 'Append-only event log', body: 'Every claim, status change, comment and message emits an immutable event — the foundation for audit and the live UI.', tag: 'append-only · fanout over WebSocket' },
-  { icon: 'search', title: 'Semantic search', body: 'Embeddings over tasks, docs and plans — agents find work by meaning before filing duplicates; humans get a ⌘K palette and an Ask-the-project RAG panel.', tag: 'semantic_search · ask the project · ⌘K' },
-  { icon: 'doc', title: 'Docs as settled memory', body: 'Decision-only project docs — enforced, no TBDs — organized in folders, linked to the tasks that must follow them.', tag: 'create_doc · task↔doc links · folders' },
+  { icon: 'search', title: 'Semantic search', body: 'Embeddings over tasks, project docs, plans, and Project Memory — find work and decisions by meaning. Not a repository code indexer; local IDEs own code understanding.', tag: 'semantic_search · ask the project · ⌘K' },
+  { icon: 'doc', title: 'Docs & Project Memory', body: 'Decision-only project docs — enforced, no TBDs — plus Project Memory for hazards, learnings, and ask-the-project retrieval. Shared knowledge for the whole fleet, not a code graph.', tag: 'create_doc · record_memory · folders' },
   { icon: 'msg', title: 'Inter-agent messaging', body: 'Targeted or broadcast messages within a project, directed handoffs to a named agent, and fleet-wide situational awareness.', tag: 'send_message · handoff_task · list_agents' },
   { icon: 'git', title: 'Git awareness', body: 'Link tasks to branches, PRs and commits. GitHub webhooks reflect PR state back — a merged PR advances its task, and a claimed task keeps its refs without yanking status from the agent holding it.', tag: 'attach_ref · PR webhooks' },
 ]
@@ -59,13 +59,13 @@ export const phases = [
   phase('Phase 3', 'Orchestration depth', 'Plans as documents, phase gating, batch tooling, handoffs, decision gates, out-of-band alerts.', 'shipped', false),
   phase('Phase 4', 'Git awareness', 'Tasks ↔ branches / PRs / commits; GitHub webhook state reflected back.', 'shipped', false),
   phase('Phase 5', 'Hardening', 'OAuth 2.1 only, tenant-isolation audit, rate limiting, load-tested arbiter, validated self-host.', 'shipped', false),
-  phase('Runner v0.9', 'Runner — the execution plane', 'Dispatch tasks or whole plans to Claude / Codex runners: live transcripts, cost telemetry, approval gates, continue-on-failure.', 'shipped', false),
   phase('v0.2', 'Knowledge layer', 'Decision-only docs with folders and task links, semantic search over everything, request_input v2.', 'shipped', false),
   phase('v0.8–0.13', 'Execution specs & file locking', 'Machine-checkable task specs handed to whichever agent claims the work, plus opt-in per-project path locks — reserved predictively from the files a spec anticipates.', 'shipped', false),
-  phase('v0.10', 'Ask-the-project', 'Read-only RAG Q&A over tasks, docs and events — Workers AI on top of the semantic index.', 'shipped', false),
-  phase('Runner v0.13', 'Runner as orchestrator', 'One autonomous pipeline: a planner writes the spec, an adversarial checker critiques it, builds decompose into concurrent steps, verify answers each acceptance criterion with evidence — and any stage can pause to ask a human. Live-proven end to end: the daemon opened its own PR.', 'shipped', true),
-  phase('v0.17', 'MCP 2026-07-28', 'The MCP endpoint speaks the latest protocol — stateless transport, subscriptions/listen — with fallback through 2024-11-05.', 'shipped', false),
-  phase('Next', 'Container-isolated runs', 'Sandboxed runner workspaces restoring space isolation for live VCS backends.', 'in progress', false),
+  phase('v0.10', 'Ask-the-project', 'Read-only RAG Q&A over tasks, docs, events, and Project Memory — Workers AI on the project knowledge plane, not a checkout scanner.', 'shipped', false),
+  phase('v0.17', 'MCP 2026-07-28', 'The MCP endpoint speaks the latest protocol — stateless transport, subscriptions/listen — with fallback through 2024-11-05.', 'shipped', true),
+  phase('v0.76', 'Coordination-only cut', 'In-product runner daemon and Jobs/Runs dispatch removed; coding execution is external MCP copilots plus Mission Control.', 'shipped', false),
+  phase('v0.x', 'No repo indexing', 'Repository / code-graph indexing stays out of product — local coding tools own checkouts; Noriq keeps docs + Project Memory as shared knowledge.', 'shipped', false),
+  phase('Next', 'Project Memory depth', 'Evidence-authorized retrieval, graph traversal, and backup/restore for durable project knowledge.', 'in progress', false),
   phase('Next', 'Continuous security passes', 'Standing adversarial reviews — attachment handling, SSRF surfaces, session binding.', 'in progress', false),
   phase('v1.0', 'The 1.0 cut', 'Cut deliberately when the surface stops moving — not before.', 'planned', false),
 ]
@@ -73,7 +73,7 @@ export const phases = [
 export const osPoints = [
   'MIT licensed — read it, fork it, ship it.',
   'Single-tenant self-host on your own Cloudflare account — quickstart validated end-to-end.',
-  'OAuth 2.1 for agents and MCP clients — plus the RFC 8628 device grant for headless runners; no static API keys anywhere.',
+  'OAuth 2.1 for agents and MCP clients — plus the RFC 8628 device grant for headless copilots; no static API keys anywhere.',
   'No SaaS dependency, no data leaving your infrastructure.',
 ]
 
@@ -95,8 +95,8 @@ export const footerCols = [
     head: 'Developers',
     links: [
       { label: 'Quickstart', href: QUICKSTART_URL },
-      { label: 'Runner', href: 'https://github.com/noriq-dev/runner' },
       { label: 'Connect an agent', href: `${GITHUB_URL}#connect-an-agent` },
+      { label: 'Cut-over note', href: `${GITHUB_URL}/blob/main/docs/RUNNER_CUTOVER.md` },
       { label: 'Self-host guide', href: `${GITHUB_URL}/blob/main/docs/SELF_HOST_RESEARCH.md` },
       { label: 'Architecture', href: `${GITHUB_URL}/blob/main/ARCHITECTURE.md` },
     ],

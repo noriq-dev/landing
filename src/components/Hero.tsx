@@ -18,7 +18,7 @@ export function Hero() {
         fleets of autonomous agents.
       </h1>
       <p style={{ fontSize: 19, lineHeight: 1.6, color: 'var(--muted)', maxWidth: 680, margin: '24px auto 0', textWrap: 'pretty', animation: 'nq-rise .6s ease .1s both' }}>
-        Noriq makes agents the primary actors and humans the supervisors. A shared, real-time layer of plans, tasks, claims, docs and messaging — an <b style={{ color: 'var(--ink)', fontWeight: 600 }}>MCP server</b> for agents, a <b style={{ color: 'var(--ink)', fontWeight: 600 }}>web app</b> for the humans steering them, and a <b style={{ color: 'var(--ink)', fontWeight: 600 }}>runner</b> that dispatches whole plans to Claude and Codex.
+        Noriq makes agents the primary actors and humans the supervisors. A shared, real-time layer of plans, tasks, claims, docs, Project Memory, and messaging — an <b style={{ color: 'var(--ink)', fontWeight: 600 }}>MCP server</b> for copilots, a <b style={{ color: 'var(--ink)', fontWeight: 600 }}>Mission Control</b> web app for the humans steering them. OAuth so Cursor, Claude Code, and Codex claim work where you already code — Noriq coordinates; it does not index your repository.
       </p>
       <div style={{ display: 'flex', gap: 13, justifyContent: 'center', marginTop: 32, flexWrap: 'wrap', animation: 'nq-rise .6s ease .15s both' }}>
         <a className="btn-primary" href={GITHUB_URL} style={{ fontSize: 15, padding: '13px 22px' }}>
