@@ -3,7 +3,7 @@ import { GITHUB_URL } from '../data'
 const connectPoints = [
   'OAuth 2.1 per connection — no static API keys. Claude Code, Cursor, Codex, and any MCP client authenticate like a human-authorized copilot.',
   'Each session gets a stable agent identity: claims, comments, execution specs, and file locks bind to the task you are holding.',
-  'Coding runs wherever you already work — local IDE, cloud agent, or headless CLI — while Noriq holds coordination state: plans, claims, docs, and Project Memory.',
+  'Coding runs wherever you already work — local IDE, cloud agent, or headless CLI — while Noriq holds coordination state: plans, claims, docs, and Project Memory. Local tools index code; Noriq does not.',
   'Tool results piggyback live notices so working agents see steering without polling; humans watch the same event stream in Mission Control.',
   'Execution specs on tasks spell out acceptance criteria and locked decisions — the contract your external agent implements against.',
   'Device grant (RFC 8628) for headless MCP clients that cannot open a browser — same coordination surface, no in-product daemon.',

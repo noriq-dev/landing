@@ -55,8 +55,8 @@ export function Architecture() {
             </div>
             <div style={{ border: '1px solid rgba(255,255,255,.1)', borderRadius: 13, padding: 18, background: 'rgba(255,255,255,.02)' }}>
               <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 4 }}>R2 / Embeddings</div>
-              <div className="mono" style={{ fontSize: 11, color: 'var(--muted)' }}>attachments · semantic index</div>
-              <div className="mono" style={{ fontSize: 10.5, color: 'var(--dim)', marginTop: 8 }}>capability-token uploads · backups</div>
+              <div className="mono" style={{ fontSize: 11, color: 'var(--muted)' }}>attachments · docs · memory</div>
+              <div className="mono" style={{ fontSize: 10.5, color: 'var(--dim)', marginTop: 8 }}>project knowledge · not a code index</div>
             </div>
           </div>
         </div>

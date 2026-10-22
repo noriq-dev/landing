@@ -6,7 +6,7 @@ export function Roadmap() {
       <div className="kicker">Roadmap</div>
       <h2 className="h2" style={{ maxWidth: 720 }}>v0.17 and counting. v1.0 when it's earned.</h2>
       <p className="lead" style={{ maxWidth: 640 }}>
-        The proof point holds in production: fleets of MCP copilots claiming concurrently with zero double-claims, humans steering mid-flight over the same event log, and execution specs that bind external agents to acceptance criteria. After the runner excision, Noriq is coordination-only — implementation stays in the tools you already use.
+        The proof point holds in production: fleets of MCP copilots claiming concurrently with zero double-claims, humans steering mid-flight over the same event log, and execution specs that bind external agents to acceptance criteria. After the runner excision, Noriq is coordination-only — MCP + docs/Project Memory — while implementation and code indexing stay in the tools you already use.
       </p>
 
       <div style={{ marginTop: 46, display: 'flex', flexDirection: 'column' }}>
